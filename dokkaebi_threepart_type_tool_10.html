@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>도깨비 세벌체 실험실</title>
+<style>
+:root{--bg:#f4f4f1;--paper:#fff;--ink:#111;--muted:#777;--line:#d7d7d2;--soft:#ecece8;--danger:#9b1c1c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:14px}
+button,input,select,textarea{font:inherit;color:inherit}button{background:#fff;border:1px solid var(--line);padding:8px 11px;cursor:pointer}button:hover{background:var(--soft)}button.primary{background:#111;color:#fff;border-color:#111}.app{min-height:100vh}.top{height:58px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 18px;gap:18px;position:sticky;top:0;z-index:20}.brand{font-weight:700;white-space:nowrap}.tabs{display:flex;height:100%}.tab{border:0;border-bottom:2px solid transparent;background:transparent;padding:0 16px}.tab.active{border-bottom-color:#111}.top-actions{margin-left:auto;display:flex;gap:6px}.page{display:none}.page.active{display:block}.workspace{display:grid;grid-template-columns:310px minmax(430px,1fr) 310px;min-height:calc(100vh - 58px)}.panel{background:#fff;border-right:1px solid var(--line);padding:16px;overflow:auto}.panel.right{border-right:0;border-left:1px solid var(--line)}.stage-wrap{padding:22px;overflow:auto}.stage{background:#fff;min-height:700px;border:1px solid var(--line);position:relative;padding:24px}.section{margin-bottom:22px}.section h3{font-size:13px;margin:0 0 10px}.muted{color:var(--muted);font-size:12px;line-height:1.5}.row{display:flex;align-items:center;gap:8px;margin:8px 0}.row label{min-width:82px;color:#444}.row input[type=number]{width:82px}.row input[type=range]{flex:1}.row select,.row input[type=text]{min-width:0;flex:1}.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.seg button.active{background:#111;color:#fff;border-color:#111}.drop{border:1px dashed #aaa;padding:16px;text-align:center;background:#fafafa}.list{display:flex;flex-direction:column;gap:6px;margin-top:10px}.item{border:1px solid var(--line);padding:8px;display:grid;grid-template-columns:42px 1fr auto;gap:8px;align-items:center;cursor:pointer}.item.active{outline:2px solid #111}.thumb{width:42px;height:42px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fff}.thumb svg{width:100%;height:100%}.badge{font-size:11px;color:#666}.danger{color:var(--danger)}.compose-area{min-height:590px;display:flex;align-items:flex-start;justify-content:center;overflow:auto;position:relative}.sample-glyphs{display:flex;align-items:flex-start;justify-content:center;gap:28px;flex-wrap:wrap;width:100%}.sample-unit{display:flex;flex-direction:column;align-items:center;gap:8px}.sample-unit-label{font-size:12px;color:var(--muted)}.glyph-host{position:relative}.guide-box{position:absolute;border:1px dashed #aaa;pointer-events:none}.guide-axis{position:absolute;background:#d0d0d0;pointer-events:none}.guide-axis.v{width:1px;top:0;bottom:0}.guide-axis.h{height:1px;left:0;right:0}.component-box{position:absolute;overflow:visible}.component-box.selected{outline:1px solid #111}.component-box svg{width:100%;height:100%;display:block;overflow:visible}.component-label{position:absolute;left:100%;top:0;margin-left:5px;font-size:10px;color:#777;white-space:nowrap}.missing{border:1px dashed var(--danger);color:var(--danger);display:flex;align-items:center;justify-content:center;text-align:center;padding:5px;font-size:11px}.preview-layout{display:grid;grid-template-columns:330px 1fr;min-height:calc(100vh - 58px)}.preview-controls{background:#fff;border-right:1px solid var(--line);padding:18px;overflow:auto}.preview-stage{padding:24px;overflow:auto}.preview-paper{background:#fff;border:1px solid var(--line);min-height:760px;padding:36px;overflow:auto}.text-input{width:100%;height:140px;resize:vertical;padding:10px;border:1px solid var(--line)}.vertical-output{display:flex;flex-direction:row-reverse;align-items:flex-start;justify-content:flex-start;min-height:600px;gap:var(--col-gap,28px)}.vcol{display:flex;flex-direction:column;align-items:center;gap:var(--char-gap,16px)}.preview-glyph{cursor:pointer;position:relative;flex:none}.space-marker{height:var(--space-size,40px);width:20px}.inspect-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:50}.inspect-overlay.open{display:flex}.inspect{width:min(900px,92vw);height:min(760px,90vh);background:#fff;border:1px solid #111;display:grid;grid-template-rows:auto 1fr}.inspect-head{padding:12px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}.inspect-head button{margin-left:auto}.inspect-body{position:relative;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:40px}.check{display:flex;align-items:center;gap:7px}.hr{height:1px;background:var(--line);margin:14px 0}.file-input{display:none}.grid-page{padding:20px}.grid-toolbar{background:#fff;border:1px solid var(--line);padding:14px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;position:sticky;top:58px;z-index:10}.grid-toolbar label{display:flex;align-items:center;gap:6px}.glyph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px;margin-top:14px}.grid-cell{background:#fff;border:1px solid var(--line);min-height:165px;padding:8px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;cursor:pointer}.grid-cell:hover{outline:1px solid #111}.grid-char{font-size:13px;font-weight:700;margin-bottom:6px}.grid-glyph-slot{height:125px;width:100%;display:flex;align-items:flex-start;justify-content:center;overflow:hidden}.grid-empty{padding:50px;text-align:center;color:var(--muted)}.auto-note{font-size:11px;color:var(--muted);margin-top:6px}.status{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:8px 12px;opacity:0;pointer-events:none;transition:.2s;z-index:99}.status.show{opacity:1}@media(max-width:1000px){.workspace{grid-template-columns:280px 1fr}.panel.right{grid-column:1/-1;border-left:0;border-top:1px solid var(--line)}.preview-layout{grid-template-columns:290px 1fr}}@media(max-width:760px){.workspace,.preview-layout{display:block}.panel,.preview-controls{border-right:0;border-bottom:1px solid var(--line)}.top{flex-wrap:wrap;height:auto;padding:8px}.top-actions{width:100%;margin-left:0}.stage-wrap,.preview-stage{padding:10px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="brand">도깨비 세벌체 실험</div><nav class="tabs"><button class="tab active" data-page="setup">벡터·조합 설정</button><button class="tab" data-page="typing">타이핑 미리보기</button><button class="tab" data-page="grid">글자 그리드</button></nav><div class="top-actions"><button id="saveProject">프로젝트 저장</button><button id="loadProjectBtn">프로젝트 불러오기</button><button id="exportSvg">미리보기 SVG 저장</button><input id="loadProject" class="file-input" type="file" accept="application/json,.json"></div></header>
+<section id="setup" class="page active"><div class="workspace">
+<aside class="panel"><div class="section"><h3>벡터 분류</h3><div class="seg" id="categorySeg"><button data-cat="initial" class="active">첫닿자</button><button data-cat="vowel">홀자</button><button data-cat="final">받침</button></div></div><div class="section"><h3>SVG 등록</h3><div class="drop"><div>SVG 파일을 선택하세요</div><p class="muted">한 번에 여러 파일을 선택할 수 있습니다.</p><button id="uploadBtn">SVG 선택</button><input id="svgFiles" class="file-input" type="file" accept="image/svg+xml,.svg" multiple></div><div class="row"><label>자모/역할</label><select id="assignJamo"></select></div><div class="row"><label>이름</label><input id="assetName" type="text" placeholder="예: ㄱ 머리"></div><button id="addAsset" class="primary" style="width:100%">선택 SVG 등록</button></div><div class="section"><h3>등록된 요소</h3><div id="assetList" class="list"></div></div></aside>
+<main class="stage-wrap"><div class="stage"><div class="row" style="justify-content:space-between;margin-top:0"><div><strong>대표 글자 조합</strong><div class="muted">설정을 바꾸면 바로 반영됩니다.</div></div><div class="row"><label style="min-width:auto">대표 글자</label><input id="sampleChar" type="text" value="강 한 글" placeholder="예: 강 한 글" style="width:150px;text-align:center;font-size:18px"></div></div><div class="hr"></div><div class="compose-area" id="composeArea"><div id="sampleGlyph" class="sample-glyphs"></div></div></div></main>
+<aside class="panel right"><div class="section"><h3>공통 조합 설정</h3><div class="row"><label>기준 폭</label><input id="baseWidth" type="number" min="40" value="220"></div><div class="row"><label>첫→홀 간격</label><input id="gapIV" type="number" value="50"></div><div class="row"><label>홀→받침</label><input id="gapVF" type="number" value="0"></div><div class="row"><label>복합 홀자</label><input id="gapVV" type="number" value="50"></div><div class="auto-note"><strong>배치 기준</strong><br>요소 간 세로 간격은 SVG 대지가 아닌 실제 벡터 영역을 기준으로 계산한다. 앞 요소의 실제 벡터 최하단에서 설정한 간격만큼 떨어진 위치에 다음 요소의 실제 벡터 최상단을 배치한다. 크기 100%는 SVG 원본 좌표계의 동일한 스케일을 유지하며, 대지의 가로폭이 넓은 요소를 기준 폭에 맞추기 위해 축소하지 않는다. 개별 위·아래 간격과 X·Y 값은 이 기준 배치에 추가 보정값으로 적용한다.</div><div class="row"><label>좌우 여백</label><input id="sidePadding" type="number" value="20"></div><label class="check"><input id="showGuidesSetup" type="checkbox" checked> 기준선·경계 표시</label></div><div class="section"><h3>선택 요소 개별 보정</h3><div id="noSelection" class="muted">왼쪽 목록에서 요소를 선택하세요.</div><div id="assetControls" style="display:none"><div class="row"><label>요소</label><strong id="selectedLabel"></strong></div><div class="row"><label>크기 %</label><input id="assetScale" type="range" min="20" max="250" value="100"><span id="assetScaleVal">100</span></div><div class="row"><label>X 보정</label><input id="assetX" type="number" value="0"></div><div class="row"><label>Y 보정</label><input id="assetY" type="number" value="0"></div><div class="row"><label>위 간격</label><input id="assetBefore" type="number" value="0"></div><div class="row"><label>아래 간격</label><input id="assetAfter" type="number" value="0"></div><button id="replaceBtn">SVG 교체</button><button id="deleteBtn" class="danger">삭제</button><input id="replaceFile" class="file-input" type="file" accept="image/svg+xml,.svg"></div></div><div class="section"><h3>배치 기준</h3><p class="muted">점선은 각 SVG의 viewBox를 기준으로 한 요소 경계입니다. 세로 중앙선은 모든 요소가 공유하는 기본 X 기준입니다. SVG 내부 여백이 다르면 X/Y 보정과 간격으로 맞출 수 있습니다.</p></div></aside>
+</div></section>
+<section id="typing" class="page"><div class="preview-layout"><aside class="preview-controls"><div class="section"><h3>문장 입력</h3><textarea id="typingText" class="text-input">아기도깨비\n한글을 세로로 쌓아봅니다.</textarea></div><div class="section"><h3>미리보기 설정</h3><div class="row"><label>글자 크기</label><input id="fontSize" type="range" min="40" max="240" value="110"><span id="fontSizeVal">110</span></div><div class="row"><label>글자 간격</label><input id="charGap" type="number" value="18"></div><div class="row"><label>열 간격</label><input id="colGap" type="number" value="34"></div><div class="row"><label>공백 높이</label><input id="spaceSize" type="number" value="42"></div><label class="check"><input id="showGuidesPreview" type="checkbox"> 안내선 표시</label></div><div class="section"><h3>누락 요소</h3><div id="missingList" class="muted">없음</div></div><div class="section"><p class="muted">글자를 클릭하면 확대 검사 모드에서 요소 경계와 기준선을 확인할 수 있습니다.</p></div></aside><main class="preview-stage"><div class="preview-paper"><div id="verticalOutput" class="vertical-output"></div></div></main></div></section>
+<section id="grid" class="page"><div class="grid-page">
+<div class="grid-toolbar">
+<strong>글자 그리드</strong>
+<label>첫닿자 <select id="gridInitial"></select></label>
+<label>홀자 <select id="gridVowel"></select></label>
+<label>받침 <select id="gridFinal"></select></label>
+<label class="check"><input id="gridBuildable" type="checkbox" checked> 등록된 요소로 만들 수 있는 글자만</label>
+<label class="check"><input id="gridIncludeTemp" type="checkbox" checked> 임시 벡터 포함</label>
+<span id="gridCount" class="muted"></span>
+</div>
+<div id="glyphGrid" class="glyph-grid"></div>
+</div></section>
+</div>
+<div id="inspectOverlay" class="inspect-overlay"><div class="inspect"><div class="inspect-head"><strong id="inspectTitle">글자 검사</strong><label class="check"><input id="inspectGuides" type="checkbox" checked> 안내선</label><button id="closeInspect">닫기</button></div><div id="inspectBody" class="inspect-body"></div></div></div><div id="status" class="status"></div>
+<script>
+'use strict';
+const JAMO={initial:['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'],vowel:['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'],final:['ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ']};
+const ASSET_JAMO={initial:JAMO.initial,vowel:JAMO.vowel,final:['ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄸ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅃ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ']};
+const COMPOUND_VOWELS={'ㅘ':['ㅗ','ㅏ'],'ㅙ':['ㅗ','ㅐ'],'ㅚ':['ㅗ','ㅣ'],'ㅝ':['ㅜ','ㅓ'],'ㅞ':['ㅜ','ㅔ'],'ㅟ':['ㅜ','ㅣ'],'ㅢ':['ㅡ','ㅣ']};
+const state={version:3,category:'initial',assets:{initial:{},vowel:{},final:{}},settings:{baseWidth:220,gapIV:50,gapVF:0,gapVV:50,sidePadding:20,visualBounds:true},selected:null,pendingFiles:[]};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function status(msg){const e=$('#status');e.textContent=msg;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),1600)}
+function decompose(ch){const n=ch.codePointAt(0)-0xAC00;if(n<0||n>11171)return null;const i=Math.floor(n/588),v=Math.floor((n%588)/28),f=n%28;return {initial:JAMO.initial[i],vowel:JAMO.vowel[v],final:f?JAMO.final[f-1]:null}}
+function vowelParts(v){return COMPOUND_VOWELS[v]||[v]}
+function composeSyllable(i,v,f=null){const ii=JAMO.initial.indexOf(i),vi=JAMO.vowel.indexOf(v),fi=f?JAMO.final.indexOf(f)+1:0;return String.fromCodePoint(0xAC00+(ii*21+vi)*28+fi)}
+function assetUsable(cat,j,includeTemp=true){const a=state.assets[cat][j];return !!a&&(includeTemp||!a.temp)}
+function syllableBuildable(i,v,f,includeTemp=true){return assetUsable('initial',i,includeTemp)&&vowelParts(v).every(x=>assetUsable('vowel',x,includeTemp))&&(!f||assetUsable('final',f,includeTemp))}
+function parseSvg(text){const p=new DOMParser().parseFromString(text,'image/svg+xml');const svg=p.documentElement;if(svg.nodeName.toLowerCase()!=='svg'||p.querySelector('parsererror'))throw new Error('올바른 SVG가 아닙니다.');let vb=svg.getAttribute('viewBox');let w=Number.parseFloat(svg.getAttribute('width'))||100,h=Number.parseFloat(svg.getAttribute('height'))||100;if(vb){const a=vb.trim().split(/[ ,]+/).map(Number);if(a.length===4&&a.every(Number.isFinite)){w=a[2];h=a[3]}}else svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.removeAttribute('width');svg.removeAttribute('height');return {svg:svg.outerHTML,ratio:w/h||1,viewBox:svg.getAttribute('viewBox')};}
+function placeholderSvg(cat,j){const shapes={initial:`<rect x="18" y="25" width="64" height="52" rx="5" fill="#111"/><circle cx="40" cy="50" r="5" fill="white"/><circle cx="60" cy="50" r="5" fill="white"/><rect x="30" y="10" width="10" height="10"/><rect x="60" y="10" width="10" height="10"/>`,vowel:`<rect x="46" y="10" width="8" height="80"/><circle cx="50" cy="50" r="12" fill="white" stroke="#111" stroke-width="7"/>`,final:`<path d="M20 20h60v38a30 30 0 0 1-60 0z"/><circle cx="40" cy="52" r="5" fill="white"/><circle cx="60" cy="52" r="5" fill="white"/>`};return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-label="${j}">${shapes[cat]}</svg>`}
+function seed(){[['initial','ㅇ'],['initial','ㄱ'],['initial','ㄷ'],['initial','ㅂ'],['vowel','ㅏ'],['vowel','ㅣ'],['vowel','ㅗ'],['vowel','ㅐ'],['final','ㅇ'],['final','ㄱ'],['final','ㅂ']].forEach(([c,j])=>{state.assets[c][j]={name:`임시 ${j}`,jamo:j,svg:placeholderSvg(c,j),ratio:1,viewBox:'0 0 100 100',scale:100,x:0,y:0,before:0,after:0,temp:true}})}
+function populateJamo(){const s=$('#assignJamo');s.innerHTML=ASSET_JAMO[state.category].map(j=>`<option value="${j}">${j}</option>`).join('')}
+function renderList(){const box=$('#assetList');box.innerHTML='';ASSET_JAMO[state.category].map(j=>state.assets[state.category][j]).filter(Boolean).forEach(a=>{const d=document.createElement('div');d.className='item'+(state.selected?.cat===state.category&&state.selected?.jamo===a.jamo?' active':'');d.innerHTML=`<div class="thumb">${a.svg}</div><div><strong>${esc(a.jamo)}</strong> · ${esc(a.name)}<div class="badge">${a.temp?'임시 벡터':'사용자 SVG'}</div></div><span>›</span>`;d.onclick=()=>selectAsset(state.category,a.jamo);box.appendChild(d)});if(!box.children.length)box.innerHTML='<div class="muted">아직 등록된 요소가 없습니다.</div>'}
+function selectAsset(cat,jamo){state.selected={cat,jamo};const a=state.assets[cat][jamo];$('#noSelection').style.display='none';$('#assetControls').style.display='block';$('#selectedLabel').textContent=`${jamo} / ${a.name}`;$('#assetScale').value=a.scale;$('#assetScaleVal').textContent=a.scale;$('#assetX').value=a.x;$('#assetY').value=a.y;$('#assetBefore').value=a.before;$('#assetAfter').value=a.after;renderList();renderSample()}
+function syncAsset(){if(!state.selected)return;const a=state.assets[state.selected.cat][state.selected.jamo];a.scale=+$('#assetScale').value;a.x=+$('#assetX').value;a.y=+$('#assetY').value;a.before=+$('#assetBefore').value;a.after=+$('#assetAfter').value;$('#assetScaleVal').textContent=a.scale;renderSample();renderTyping()}
+function getVisualBounds(asset){
+  if(asset.visualBounds&&Number.isFinite(asset.visualBounds.x)&&Number.isFinite(asset.visualBounds.y)&&asset.visualBounds.width>0&&asset.visualBounds.height>0)return asset.visualBounds;
+  const wrap=document.createElement('div');wrap.style.cssText='position:absolute;left:-100000px;top:-100000px;visibility:hidden;width:1000px;height:1000px';wrap.innerHTML=asset.svg;document.body.appendChild(wrap);
+  const svg=wrap.querySelector('svg');let b=null;try{const targets=[...svg.children].filter(el=>!['defs','style','title','desc'].includes(el.tagName.toLowerCase()));if(targets.length){const boxes=targets.map(el=>{try{return el.getBBox()}catch{return null}}).filter(x=>x&&x.width>=0&&x.height>=0);if(boxes.length){const x1=Math.min(...boxes.map(x=>x.x)),y1=Math.min(...boxes.map(x=>x.y)),x2=Math.max(...boxes.map(x=>x.x+x.width)),y2=Math.max(...boxes.map(x=>x.y+x.height));b={x:x1,y:y1,width:x2-x1,height:y2-y1}}}if(!b){const x=svg.getBBox();b={x:x.x,y:x.y,width:x.width,height:x.height}}}catch{}wrap.remove();
+  if(!b||!b.width||!b.height){const v=(asset.viewBox||'0 0 100 100').trim().split(/[ ,]+/).map(Number);b={x:v[0]||0,y:v[1]||0,width:v[2]||100,height:v[3]||100}}asset.visualBounds=b;return b;
+}
+function componentMetrics(asset,baseW){const vb=(asset.viewBox||'0 0 100 100').trim().split(/[ ,]+/).map(Number);const vbW=vb[2]||100,vbH=vb[3]||100;const referenceViewBoxWidth=200;const unitScale=(baseW/referenceViewBoxWidth)*(asset.scale/100);const width=vbW*unitScale,height=vbH*unitScale;const bounds=getVisualBounds(asset);return {width,height,visualTop:(bounds.y-(vb[1]||0))*unitScale,visualBottom:(bounds.y+bounds.height-(vb[1]||0))*unitScale}}
+function makeGlyph(ch,{scale=1,guides=false}={}){const parts=decompose(ch);if(!parts){const outer=document.createElement('div');outer.className='glyph-host';outer.style.width=`${state.settings.baseWidth*scale}px`;outer.style.height=`${state.settings.baseWidth*.7*scale}px`;outer.classList.add('missing');outer.textContent=ch;return {el:outer,width:state.settings.baseWidth*scale,height:state.settings.baseWidth*.7*scale,missing:[]}}return makeGlyphParts(parts,{scale,guides})}
+function makeGlyphParts(parts,{scale=1,guides=false}={}){const outer=document.createElement('div');outer.className='glyph-host';const vp=vowelParts(parts.vowel);const seq=[{cat:'initial',j:parts.initial,gap:0,label:parts.initial},{cat:'vowel',j:vp[0],gap:state.settings.gapIV,label:vp[0]}];for(let k=1;k<vp.length;k++)seq.push({cat:'vowel',j:vp[k],gap:state.settings.gapVV,label:vp[k]});if(parts.final)seq.push({cat:'final',j:parts.final,gap:state.settings.gapVF,label:parts.final});let y=0,maxW=state.settings.baseWidth*scale,missing=[];const placed=[];seq.forEach(({cat,j,gap,label})=>{const a=state.assets[cat][j];if(!a){const h=70*scale,w=state.settings.baseWidth*.7*scale;y+=(gap+5)*scale;placed.push({missing:true,cat,j,x:(maxW-w)/2,y,w,h});y+=h;missing.push(`${cat==='initial'?'첫닿자':cat==='vowel'?'홀자':'받침'} ${j}`);return}const m=componentMetrics(a,state.settings.baseWidth*scale);const desiredTop=y+(gap+a.before)*scale;const boxY=desiredTop-m.visualTop+a.y*scale;const x=(maxW-m.width)/2+a.x*scale;placed.push({asset:a,cat,j,x,y:boxY,w:m.width,h:m.height});y=boxY+m.visualBottom+(a.after)*scale});const pad=state.settings.sidePadding*scale;const minX=Math.min(0,...placed.map(p=>p.x)),maxX=Math.max(maxW,...placed.map(p=>p.x+p.w));const shift=pad-minX;outer.style.width=`${maxX-minX+pad*2}px`;outer.style.height=`${Math.max(1,y)+pad*2}px`;placed.forEach(p=>{const e=document.createElement('div');e.className='component-box'+(p.missing?' missing':'');e.style.left=`${p.x+shift}px`;e.style.top=`${p.y+pad}px`;e.style.width=`${p.w}px`;e.style.height=`${p.h}px`;if(p.missing)e.textContent=`누락\n${p.j}`;else e.innerHTML=p.asset.svg;if(guides){e.style.outline='1px dashed #999';const l=document.createElement('span');l.className='component-label';l.textContent=`${p.j} ${p.cat==='initial'?'첫닿자':p.cat==='vowel'?'홀자':'받침'}`;e.appendChild(l)}outer.appendChild(e)});if(guides){const v=document.createElement('div');v.className='guide-axis v';v.style.left=`${shift+maxW/2}px`;outer.appendChild(v);const top=document.createElement('div');top.className='guide-axis h';top.style.top=`${pad}px`;outer.appendChild(top)}return {el:outer,width:parseFloat(outer.style.width),height:parseFloat(outer.style.height),missing}}
+function renderSample(){const host=$('#sampleGlyph');host.innerHTML='';const chars=Array.from($('#sampleChar').value||'가').filter(ch=>decompose(ch));const list=chars.length?chars:['가'];for(const ch of list){const g=makeGlyph(ch,{scale:1,guides:$('#showGuidesSetup').checked});const unit=document.createElement('div');unit.className='sample-unit';unit.appendChild(g.el);const label=document.createElement('div');label.className='sample-unit-label';label.textContent=ch;unit.appendChild(label);host.appendChild(unit)}}
+function renderTyping(){const out=$('#verticalOutput');out.innerHTML='';out.style.setProperty('--char-gap',`${+$('#charGap').value}px`);out.style.setProperty('--col-gap',`${+$('#colGap').value}px`);out.style.setProperty('--space-size',`${+$('#spaceSize').value}px`);const text=$('#typingText').value;const lines=text.split('\n');const font=+$('#fontSize').value;$('#fontSizeVal').textContent=font;const scale=font/state.settings.baseWidth;const misses=new Set();lines.forEach(line=>{const col=document.createElement('div');col.className='vcol';Array.from(line).forEach(ch=>{if(ch===' '){const s=document.createElement('div');s.className='space-marker';col.appendChild(s);return}const g=makeGlyph(ch,{scale,guides:$('#showGuidesPreview').checked});g.missing.forEach(x=>misses.add(x));g.el.classList.add('preview-glyph');g.el.title=`${ch} 확대`;g.el.onclick=()=>inspectChar(ch);col.appendChild(g.el)});out.appendChild(col)});$('#missingList').textContent=misses.size?[...misses].join(', '):'없음'}
+function inspectChar(ch){$('#inspectTitle').textContent=`“${ch}” 글자 검사`;$('#inspectOverlay').classList.add('open');renderInspect(ch)}
+function renderInspect(ch){const body=$('#inspectBody');body.innerHTML='';const g=makeGlyph(ch,{scale:2.2,guides:$('#inspectGuides').checked});body.appendChild(g.el);body.dataset.char=ch}
+function initGridControls(){const opts=(arr,all='전체')=>`<option value="">${all}</option>`+arr.map(x=>`<option value="${x}">${x}</option>`).join('');$('#gridInitial').innerHTML=opts(JAMO.initial);$('#gridVowel').innerHTML=opts(JAMO.vowel);$('#gridFinal').innerHTML=`<option value="none">받침 없음</option><option value="all">모든 받침</option>`+ASSET_JAMO.final.map(x=>`<option value="${x}">${x}</option>`).join('');$('#gridFinal').value='none'}
+let gridObserver=null;
+function renderGrid(){
+  const box=$('#glyphGrid');if(!box)return;box.innerHTML='';if(gridObserver)gridObserver.disconnect();
+  const ii=$('#gridInitial').value?[$('#gridInitial').value]:JAMO.initial;
+  const vv=$('#gridVowel').value?[$('#gridVowel').value]:JAMO.vowel;
+  const fv=$('#gridFinal').value==='none'?[null]:$('#gridFinal').value==='all'?[null,...ASSET_JAMO.final]:[$('#gridFinal').value];
+  const only=$('#gridBuildable').checked,includeTemp=$('#gridIncludeTemp').checked;
+  const cells=[];
+  for(const i of ii)for(const v of vv)for(const f of fv){
+    if(only&&!syllableBuildable(i,v,f,includeTemp))continue;
+    const standard=!f||JAMO.final.includes(f);
+    const ch=standard?composeSyllable(i,v,f):composeSyllable(i,v,null);
+    cells.push({i,v,f,ch,standard});
+  }
+  $('#gridCount').textContent=`${cells.length.toLocaleString()}자`;
+  if(!cells.length){box.innerHTML='<div class="grid-empty">현재 조건에서 조합 가능한 글자가 없습니다.</div>';return}
+
+  const drawSlot=slot=>{
+    const parts={initial:slot.dataset.initial,vowel:slot.dataset.vowel,final:slot.dataset.final||null};
+    const g=makeGlyphParts(parts,{scale:.34,guides:false});
+    slot.appendChild(g.el);
+  };
+
+  const lazy=typeof IntersectionObserver!=='undefined';
+  if(lazy)gridObserver=new IntersectionObserver(entries=>{
+    for(const en of entries){
+      if(!en.isIntersecting)continue;
+      drawSlot(en.target);
+      gridObserver.unobserve(en.target);
+    }
+  },{rootMargin:'300px'});
+
+  for(const item of cells){
+    const cell=document.createElement('div');cell.className='grid-cell';
+    const display=item.standard?item.ch:`${item.ch}+${item.f}`;
+    cell.innerHTML=`<div class="grid-char">${display} <span class="muted">${item.i}·${item.v}${item.f?'·'+item.f:''}</span></div><div class="grid-glyph-slot"></div>`;
+    box.appendChild(cell);
+    const slot=cell.querySelector('.grid-glyph-slot');
+    slot.dataset.initial=item.i;slot.dataset.vowel=item.v;slot.dataset.final=item.f||'';
+    if(lazy)gridObserver.observe(slot);else drawSlot(slot);
+  }
+}
+
+function download(name,text,type){const b=new Blob([text],{type});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function serialize(){return JSON.stringify({app:'도깨비 세벌체 실험실',version:3,assets:state.assets,settings:state.settings},null,2)}
+function glyphToExportSvg(g){
+  let body='';
+  g.el.querySelectorAll('.component-box').forEach(box=>{
+    const x=parseFloat(box.style.left)||0,y=parseFloat(box.style.top)||0;
+    const w=parseFloat(box.style.width)||0,h=parseFloat(box.style.height)||0;
+    const svg=box.querySelector('svg');
+    if(svg){
+      const clone=svg.cloneNode(true);
+      clone.setAttribute('x',x);clone.setAttribute('y',y);
+      clone.setAttribute('width',w);clone.setAttribute('height',h);
+      clone.setAttribute('overflow','visible');
+      clone.removeAttribute('style');
+      body+=clone.outerHTML;
+    }else{
+      body+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="#9b1c1c" stroke-dasharray="4 3"/>`;
+    }
+  });
+  return body;
+}
+function exportPreviewSvg(){
+  const text=$('#typingText').value,lines=text.split('\n'),font=+$('#fontSize').value;
+  const scale=font/state.settings.baseWidth,charGap=+$('#charGap').value;
+  const colGap=+$('#colGap').value,space=+$('#spaceSize').value;
+  let columns=[],totalW=0,maxH=0;
+
+  for(const line of lines){
+    let y=0,cells=[],cw=0;
+    for(const ch of Array.from(line)){
+      if(ch===' '){y+=space;continue}
+      const g=makeGlyph(ch,{scale,guides:false});
+      cells.push({y,w:g.width,h:g.height,markup:glyphToExportSvg(g)});
+      cw=Math.max(cw,g.width);
+      y+=g.height+charGap;
+    }
+    if(cells.length)y-=charGap;
+    const colW=Math.max(cw,font);
+    columns.push({w:colW,h:y,cells});
+    totalW+=colW;
+    maxH=Math.max(maxH,y);
+  }
+
+  totalW+=Math.max(0,columns.length-1)*colGap;
+  let x=totalW,body='';
+  for(const c of columns){
+    x-=c.w;
+    for(const cell of c.cells){
+      const dx=x+(c.w-cell.w)/2;
+      body+=`<g transform="translate(${dx} ${cell.y})">${cell.markup}</g>`;
+    }
+    x-=colGap;
+  }
+
+  const width=Math.max(1,Math.ceil(totalW)),height=Math.max(1,Math.ceil(maxH));
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">${body}</svg>`;
+  download('dokkaebi-preview.svg',svg,'image/svg+xml');
+  status('미리보기 SVG를 저장했습니다.');
+}
+$$('.tab').forEach(b=>b.onclick=()=>{$$('.tab').forEach(x=>x.classList.toggle('active',x===b));$$('.page').forEach(p=>p.classList.toggle('active',p.id===b.dataset.page));if(b.dataset.page==='typing')renderTyping();if(b.dataset.page==='grid')renderGrid()});
+$$('#categorySeg button').forEach(b=>b.onclick=()=>{state.category=b.dataset.cat;$$('#categorySeg button').forEach(x=>x.classList.toggle('active',x===b));populateJamo();renderList()});
+$('#uploadBtn').onclick=()=>$('#svgFiles').click();$('#svgFiles').onchange=e=>{state.pendingFiles=[...e.target.files];if(state.pendingFiles[0])$('#assetName').value=state.pendingFiles[0].name.replace(/\.svg$/i,'');status(`${state.pendingFiles.length}개 SVG 선택됨`)};
+$('#addAsset').onclick=async()=>{if(!state.pendingFiles.length)return status('먼저 SVG 파일을 선택하세요.');for(let i=0;i<state.pendingFiles.length;i++){const f=state.pendingFiles[i],assetOrder=ASSET_JAMO[state.category],j=i===0?$('#assignJamo').value:assetOrder[Math.min(assetOrder.indexOf($('#assignJamo').value)+i,assetOrder.length-1)];try{const d=parseSvg(await f.text());state.assets[state.category][j]={name:i===0?($('#assetName').value||f.name):f.name.replace(/\.svg$/i,''),jamo:j,...d,scale:100,x:0,y:0,before:0,after:0,temp:false}}catch(err){alert(`${f.name}: ${err.message}`)}}state.pendingFiles=[];$('#svgFiles').value='';renderList();renderSample();renderTyping();renderGrid();status('SVG를 등록했습니다.')};
+['assetScale','assetX','assetY','assetBefore','assetAfter'].forEach(id=>$('#'+id).addEventListener('input',syncAsset));
+['baseWidth','gapIV','gapVF','gapVV','sidePadding'].forEach(id=>$('#'+id).addEventListener('input',()=>{const map={baseWidth:'baseWidth',gapIV:'gapIV',gapVF:'gapVF',gapVV:'gapVV',sidePadding:'sidePadding'};state.settings[map[id]]=+$('#'+id).value;renderSample();renderTyping()}));
+$('#showGuidesSetup').onchange=renderSample;$('#sampleChar').oninput=renderSample;
+$('#deleteBtn').onclick=()=>{if(!state.selected)return;delete state.assets[state.selected.cat][state.selected.jamo];state.selected=null;$('#assetControls').style.display='none';$('#noSelection').style.display='block';renderList();renderSample();renderTyping();renderGrid()};
+$('#replaceBtn').onclick=()=>$('#replaceFile').click();$('#replaceFile').onchange=async e=>{if(!state.selected||!e.target.files[0])return;const a=state.assets[state.selected.cat][state.selected.jamo];try{Object.assign(a,parseSvg(await e.target.files[0].text()),{temp:false});a.name=e.target.files[0].name.replace(/\.svg$/i,'');selectAsset(state.selected.cat,state.selected.jamo);renderTyping();renderGrid();status('SVG를 교체했습니다.')}catch(err){alert(err.message)}e.target.value=''};
+['typingText','fontSize','charGap','colGap','spaceSize','showGuidesPreview'].forEach(id=>$('#'+id).addEventListener('input',renderTyping));
+$('#closeInspect').onclick=()=>$('#inspectOverlay').classList.remove('open');$('#inspectOverlay').onclick=e=>{if(e.target===$('#inspectOverlay'))$('#inspectOverlay').classList.remove('open')};$('#inspectGuides').onchange=()=>renderInspect($('#inspectBody').dataset.char||'가');
+$('#saveProject').onclick=()=>{download('dokkaebi-type-project.json',serialize(),'application/json');status('프로젝트를 저장했습니다.')};$('#loadProjectBtn').onclick=()=>$('#loadProject').click();$('#loadProject').onchange=async e=>{try{const p=JSON.parse(await e.target.files[0].text());if(!p.assets||!p.settings)throw new Error();state.assets=p.assets;state.settings={baseWidth:220,gapIV:50,gapVF:0,gapVV:50,sidePadding:20,visualBounds:true,...p.settings};state.selected=null;$('#baseWidth').value=state.settings.baseWidth;$('#gapIV').value=state.settings.gapIV;$('#gapVF').value=state.settings.gapVF;$('#gapVV').value=state.settings.gapVV;$('#sidePadding').value=state.settings.sidePadding;renderList();renderSample();renderTyping();status('프로젝트를 불러왔습니다.')}catch{alert('프로젝트 JSON을 읽을 수 없습니다.')}e.target.value=''};
+$('#exportSvg').onclick=exportPreviewSvg;
+['gridInitial','gridVowel','gridFinal','gridBuildable','gridIncludeTemp'].forEach(id=>$('#'+id).addEventListener('change',renderGrid));
+populateJamo();initGridControls();renderList();renderSample();renderTyping();renderGrid();
+</script>
+</body></html>

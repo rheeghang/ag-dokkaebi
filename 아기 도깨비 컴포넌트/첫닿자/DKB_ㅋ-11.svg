@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_1" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <polygon points="156.63 163.9 74.62 163.9 43.37 70.19 156.63 70.19 156.63 163.9"/>
+  <rect x="64.08" y="36.1" width="24.98" height="17.52"/>
+  <rect x="110.94" y="36.1" width="24.98" height="17.52"/>
+  <circle class="cls-1" cx="89.15" cy="117.04" r="8.13"/>
+  <circle class="cls-1" cx="123.43" cy="117.04" r="8.13"/>
+</svg>
