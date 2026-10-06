@@ -15,7 +15,7 @@ button,input,select,textarea{font:inherit;color:inherit}button{background:#fff;b
 </head>
 <body>
 <div class="app">
-<header class="top"><div class="brand">도깨비 세벌체 실험</div><nav class="tabs"><button class="tab active" data-page="setup">벡터·조합 설정</button><button class="tab" data-page="typing">타이핑 미리보기</button><button class="tab" data-page="grid">글자 그리드</button></nav><div class="top-actions"><button id="saveProject">프로젝트 저장</button><button id="loadProjectBtn">프로젝트 불러오기</button><button id="exportSvg">미리보기 SVG 저장</button><input id="loadProject" class="file-input" type="file" accept="application/json,.json"></div></header>
+<header class="top"><div class="brand">도깨비 세벌체 미리보기</div><nav class="tabs"><button class="tab active" data-page="setup">벡터·조합 설정</button><button class="tab" data-page="typing">타이핑 미리보기</button><button class="tab" data-page="grid">글자 그리드</button></nav><div class="top-actions"><button id="saveProject">프로젝트 저장</button><button id="loadProjectBtn">프로젝트 불러오기</button><button id="exportSvg">미리보기 SVG 저장</button><input id="loadProject" class="file-input" type="file" accept="application/json,.json"></div></header>
 <section id="setup" class="page active"><div class="workspace">
 <aside class="panel"><div class="section"><h3>벡터 분류</h3><div class="seg" id="categorySeg"><button data-cat="initial" class="active">첫닿자</button><button data-cat="vowel">홀자</button><button data-cat="final">받침</button></div></div><div class="section"><h3>SVG 등록</h3><div class="drop"><div>SVG 파일을 선택하세요</div><p class="muted">한 번에 여러 파일을 선택할 수 있습니다.</p><button id="uploadBtn">SVG 선택</button><input id="svgFiles" class="file-input" type="file" accept="image/svg+xml,.svg" multiple></div><div class="row"><label>자모/역할</label><select id="assignJamo"></select></div><div class="row"><label>이름</label><input id="assetName" type="text" placeholder="예: ㄱ 머리"></div><button id="addAsset" class="primary" style="width:100%">선택 SVG 등록</button></div><div class="section"><h3>등록된 요소</h3><div id="assetList" class="list"></div></div></aside>
 <main class="stage-wrap"><div class="stage"><div class="row" style="justify-content:space-between;margin-top:0"><div><strong>대표 글자 조합</strong><div class="muted">설정을 바꾸면 바로 반영됩니다.</div></div><div class="row"><label style="min-width:auto">대표 글자</label><input id="sampleChar" type="text" value="강 한 글" placeholder="예: 강 한 글" style="width:150px;text-align:center;font-size:18px"></div></div><div class="hr"></div><div class="compose-area" id="composeArea"><div id="sampleGlyph" class="sample-glyphs"></div></div></div></main>
@@ -317,25 +317,29 @@ $('#saveProject').onclick=()=>{download('dokkaebi-type-project.json',serialize()
 $('#exportSvg').onclick=exportPreviewSvg;
 ['gridInitial','gridVowel','gridFinal','gridBuildable','gridIncludeTemp'].forEach(id=>$('#'+id).addEventListener('change',renderGrid));
 populateJamo();initGridControls();renderList();renderSample();renderTyping();renderGrid();
+function setInput(id,value){const el=$('#'+id);if(el)el.value=value}
 async function loadDocumentProject(){
   try{
-    const r=await fetch('./project.json',{cache:'no-store'});
+    const r=await fetch(new URL('project.json',location.href),{cache:'no-store'});
     if(!r.ok)throw new Error(`HTTP ${r.status}`);
     const p=await r.json();
     if(!p.assets||!p.settings)throw new Error('invalid project');
     state.assets=p.assets;state.settings={baseWidth:220,gapIV:50,gapVF:0,gapVV:50,sidePadding:20,visualBounds:true,...p.settings};
-    $('#baseWidth').value=state.settings.baseWidth;$('#gapIV').value=state.settings.gapIV;$('#gapVF').value=state.settings.gapVF;$('#gapVV').value=state.settings.gapVV;$('#sidePadding').value=state.settings.sidePadding;
-    document.querySelector('[data-page="typing"]').click();
+    setInput('baseWidth',state.settings.baseWidth);setInput('gapIV',state.settings.gapIV);setInput('gapVF',state.settings.gapVF);setInput('gapVV',state.settings.gapVV);setInput('sidePadding',state.settings.sidePadding);
+    const typingTab=document.querySelector('[data-page="typing"]');
+    if(typingTab)typingTab.click();
     renderTyping();renderGrid();
   }catch(err){
-    $('#missingList').textContent='project.json을 불러올 수 없습니다.';
+    const missing=$('#missingList');
+    if(missing)missing.textContent='project.json을 불러올 수 없습니다.';
     console.error(err);
   }
 }
 document.body.classList.add('document-view');
-$('#setup').remove();
+$('#setup')?.remove();
 $$('.tab').forEach(b=>{if(b.dataset.page==='setup')b.remove()});
-$('#saveProject').style.display='none';$('#loadProjectBtn').style.display='none';
+if($('#saveProject'))$('#saveProject').style.display='none';
+if($('#loadProjectBtn'))$('#loadProjectBtn').style.display='none';
 
 loadDocumentProject();
 </script>
