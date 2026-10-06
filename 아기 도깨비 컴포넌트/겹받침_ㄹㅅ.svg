@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="_레이어_1" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300.07 200">
   <rect x="40.39" y="82.04" width="35.92" height="26.7" transform="translate(153.74 37.04) rotate(90)"/>
-  <rect x="72.66" y="82.04" width="35.92" height="26.7" transform="translate(186 4.78) rotate(90)"/>
-  <polyline points="237.79 86.65 253.93 113.35 221.66 113.35"/>
-  <polyline points="205.52 86.65 221.66 113.35 189.39 113.35"/>
+  <polyline points="87.83 86.65 103.96 113.35 71.69 113.35"/>
+  <rect x="222.62" y="82.04" width="35.92" height="26.7" transform="translate(335.97 -145.19) rotate(90)"/>
+  <polyline points="211.1 86.65 194.96 113.35 227.23 113.35"/>
 </svg>

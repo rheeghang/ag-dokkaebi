@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="_레이어_1" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300.07 200">
-  <rect x="40.39" y="92.18" width="35.92" height="26.7" transform="translate(163.87 47.18) rotate(90)"/>
-  <rect x="72.66" y="92.18" width="35.92" height="26.7" transform="translate(196.14 14.91) rotate(90)"/>
-  <rect x="194.67" y="91.26" width="26.7" height="26.7" transform="translate(134.9 -116.45) rotate(45)"/>
-  <rect x="232.42" y="91.26" width="26.7" height="26.7" transform="translate(145.96 -143.15) rotate(45)"/>
+  <g>
+    <rect x="38.35" y="92.18" width="35.92" height="26.7" transform="translate(161.84 49.22) rotate(90)"/>
+    <rect x="75.23" y="91.26" width="26.7" height="26.7" transform="translate(99.91 -31.99) rotate(45)"/>
+  </g>
+  <g>
+    <rect x="225.8" y="92.18" width="35.92" height="26.7" transform="translate(349.29 -138.23) rotate(90)"/>
+    <rect x="198.14" y="91.26" width="26.7" height="26.7" transform="translate(435 29.04) rotate(135)"/>
+  </g>
 </svg>
