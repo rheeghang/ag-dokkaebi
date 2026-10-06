@@ -1,0 +1,6 @@
+{
+  "app": "도깨비 세벌체 실험실",
+  "version": 3,
+  "assets": {"initial": {}, "vowel": {}, "final": {}},
+  "settings": {"baseWidth": 220, "gapIV": 50, "gapVF": 0, "gapVV": 50, "sidePadding": 20, "visualBounds": true}
+}
